@@ -188,7 +188,6 @@ function testEvaluateExpression1() {
         } else {
             output -= obj[x[i+1]]
         }
-        console.log(output)
     }
     return output
  }
