@@ -1,7 +1,7 @@
 const array1 = [6, 5, 10, 44, 100, 189873, 3]
 const array2 = [278364612, 222, 50, 1, 7846562, 888]
-const array3 = [1, 3, 5, 3, 7, 3, 1, 1, 5]
-const array4 = [11, 42, 57, 11, 63, 42, 71]
+const string3 = "1 3 5 3 7 3 1 1 5"
+const string4 = "11 42 57 11 63 42 71"
 const string1 = "1 3 5 3 7 3 1 1 5"
 const string2 = "2 2 5 5 5 9 7 2 1" // 
 
@@ -115,36 +115,40 @@ testCalculateRemainder1()
 testCalculateRemainder2()
 
 const testDistinctValues1 = () =>{
-    let result = distinctValues(array3)
+    let result = distinctValues(string3)
     let expected = '1 3 5 7' 
     console.assert(result === expected, `esperado: ${expected}, obtido: ${result}`)  
 }
 
 const testDistinctValues2 = () =>{
-    let result = distinctValues(array4)
+    let result = distinctValues(string4)
     let expected = '11 42 57 63 71' 
     console.assert(result === expected, `esperado: ${expected}, obtido: ${result}`)
 }
 
-const distinctValues = (array) => [...new Set(array)].join(" ")
+const distinctValues = (string) => {
+    let output = string.split(" ")
+    return [...new Set(output)].join(" ")
+}
 
 testDistinctValues1()
 testDistinctValues2()
 
 function testCountValues1 () {
-    let result = displayCountValues(string1)
+    let result = countValues(string1)
     let expected = "1(3) 3(3) 5(2) 7(1)"
     console.assert(result === expected, `esperado: ${expected}, obtido: ${result}`)
 }
 
 function testCountValues2 () {
-    let result = displayCountValues(string2)
+    let result = countValues(string2)
     let expected = "1(1) 2(3) 5(3) 7(1) 9(1)"
     console.assert(result === expected, `esperado: ${expected}, obtido: ${result}`)
 }
 
 const countValues = (string) => {
     let output = {};
+    let str = ""
     string.split(" ").forEach(item => {
         if (output[item] === undefined) {
             output[item] = 1;
@@ -152,14 +156,8 @@ const countValues = (string) => {
             output[item]++;
         }
     })
-    return output
-}
-
-const displayCountValues = (string) => {
-    let obj = countValues(string);
-    let str = ""
-    for (let element in obj) {
-        str += `${element}(${obj[element]}) `
+    for (let element in output) {
+        str += `${element}(${output[element]}) `
     }
     return str.trim()
 }
